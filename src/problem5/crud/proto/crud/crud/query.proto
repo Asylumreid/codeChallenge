@@ -31,6 +31,12 @@ service Query {
     option (google.api.http).get = "/crud/crud/list_post";
   
   }
+  
+  // Queries a list of ListSpecificPosts items.
+  rpc ListSpecificPosts (QueryListSpecificPostsRequest) returns (QueryListSpecificPostsResponse) {
+    option (google.api.http).get = "/crud/crud/list_specific_posts/{eventType}";
+  
+  }
 }
 // QueryParamsRequest is request type for the Query/Params RPC method.
 message QueryParamsRequest {}
@@ -55,6 +61,16 @@ message QueryListPostRequest {
 }
 
 message QueryListPostResponse {
+  repeated Post                                   post       = 1 [(gogoproto.nullable) = false];
+           cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
+message QueryListSpecificPostsRequest {
+  string                                eventType  = 1;
+  cosmos.base.query.v1beta1.PageRequest pagination = 2;
+}
+
+message QueryListSpecificPostsResponse {
   repeated Post post = 1 [(gogoproto.nullable) = false];
   cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }
