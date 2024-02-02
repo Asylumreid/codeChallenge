@@ -1,3 +1,9 @@
+#Implementing Consensus Breaking
+
+My approach to this is by trying to hard fork my chain by modifying some versions of my App.go files which would allow one chain to run the old version of the consensus protocol and state while the other chain runs the new version, incompatible with the previous one. With this theory, I tried to modify the version however, was not able to get a clear consensus-breaking introduction into my chain. Would still need more time in research to be able to fully understand the tender mint consensus to implement another method to introduce this change.
+
+
+
 # Brief about my CRUD Chain
 Welcome to my CRUD Chain for Problem 5. I decided to create a use case on how this chain might be implemented in the real world. Thus creating an Events Platform-inspired CRUD chain. This chain allows creators to create event posts. Those interested in those events can be able to express their interest and the chain will tally the total number of interests for each event. Let's go into detail how this is done. 
 
