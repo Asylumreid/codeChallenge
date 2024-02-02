@@ -2,16 +2,29 @@ package keeper
 
 import (
 	"context"
+	"fmt"
 
 	"crud/x/crud/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
+	errorsmod "cosmossdk.io/errors"
+	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 )
 
 func (k msgServer) ExpressInterest(goCtx context.Context, msg *types.MsgExpressInterest) (*types.MsgExpressInterestResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
-	// TODO: Handling the message
-	_ = ctx
+	err := k.AddInterestToEventPost(ctx, msg.Id)
+    if err != nil {
+        return nil, err
+    }
 
-	return &types.MsgExpressInterestResponse{}, nil
+	post, found := k.GetPost(ctx, msg.Id)
+    if !found {
+        return nil, errorsmod.Wrap(sdkerrors.ErrKeyNotFound, fmt.Sprintf("key %d doesn't exist", msg.Id))
+    }
+
+	return &types.MsgExpressInterestResponse{
+		NewInterestCount: post.Interest,
+	}, nil
+	
 }
