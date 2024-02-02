@@ -10,7 +10,7 @@ message Post {
   string datetime = 3; 
   string venue = 4; 
   string description = 5; 
-  int32 interest = 6; 
+  int64 interest = 6; 
   string creator = 7; 
   uint64 id = 8; 
 }

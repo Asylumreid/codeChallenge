@@ -132,8 +132,8 @@ func (x *fastReflection_Post) Range(f func(protoreflect.FieldDescriptor, protore
 			return
 		}
 	}
-	if x.Interest != int32(0) {
-		value := protoreflect.ValueOfInt32(x.Interest)
+	if x.Interest != int64(0) {
+		value := protoreflect.ValueOfInt64(x.Interest)
 		if !f(fd_Post_interest, value) {
 			return
 		}
@@ -176,7 +176,7 @@ func (x *fastReflection_Post) Has(fd protoreflect.FieldDescriptor) bool {
 	case "crud.crud.Post.description":
 		return x.Description != ""
 	case "crud.crud.Post.interest":
-		return x.Interest != int32(0)
+		return x.Interest != int64(0)
 	case "crud.crud.Post.creator":
 		return x.Creator != ""
 	case "crud.crud.Post.id":
@@ -208,7 +208,7 @@ func (x *fastReflection_Post) Clear(fd protoreflect.FieldDescriptor) {
 	case "crud.crud.Post.description":
 		x.Description = ""
 	case "crud.crud.Post.interest":
-		x.Interest = int32(0)
+		x.Interest = int64(0)
 	case "crud.crud.Post.creator":
 		x.Creator = ""
 	case "crud.crud.Post.id":
@@ -246,7 +246,7 @@ func (x *fastReflection_Post) Get(descriptor protoreflect.FieldDescriptor) proto
 		return protoreflect.ValueOfString(value)
 	case "crud.crud.Post.interest":
 		value := x.Interest
-		return protoreflect.ValueOfInt32(value)
+		return protoreflect.ValueOfInt64(value)
 	case "crud.crud.Post.creator":
 		value := x.Creator
 		return protoreflect.ValueOfString(value)
@@ -284,7 +284,7 @@ func (x *fastReflection_Post) Set(fd protoreflect.FieldDescriptor, value protore
 	case "crud.crud.Post.description":
 		x.Description = value.Interface().(string)
 	case "crud.crud.Post.interest":
-		x.Interest = int32(value.Int())
+		x.Interest = value.Int()
 	case "crud.crud.Post.creator":
 		x.Creator = value.Interface().(string)
 	case "crud.crud.Post.id":
@@ -349,7 +349,7 @@ func (x *fastReflection_Post) NewField(fd protoreflect.FieldDescriptor) protoref
 	case "crud.crud.Post.description":
 		return protoreflect.ValueOfString("")
 	case "crud.crud.Post.interest":
-		return protoreflect.ValueOfInt32(int32(0))
+		return protoreflect.ValueOfInt64(int64(0))
 	case "crud.crud.Post.creator":
 		return protoreflect.ValueOfString("")
 	case "crud.crud.Post.id":
@@ -757,7 +757,7 @@ func (x *fastReflection_Post) ProtoMethods() *protoiface.Methods {
 					}
 					b := dAtA[iNdEx]
 					iNdEx++
-					x.Interest |= int32(b&0x7F) << shift
+					x.Interest |= int64(b&0x7F) << shift
 					if b < 0x80 {
 						break
 					}
@@ -871,7 +871,7 @@ type Post struct {
 	Datetime    string `protobuf:"bytes,3,opt,name=datetime,proto3" json:"datetime,omitempty"`
 	Venue       string `protobuf:"bytes,4,opt,name=venue,proto3" json:"venue,omitempty"`
 	Description string `protobuf:"bytes,5,opt,name=description,proto3" json:"description,omitempty"`
-	Interest    int32  `protobuf:"varint,6,opt,name=interest,proto3" json:"interest,omitempty"`
+	Interest    int64  `protobuf:"varint,6,opt,name=interest,proto3" json:"interest,omitempty"`
 	Creator     string `protobuf:"bytes,7,opt,name=creator,proto3" json:"creator,omitempty"`
 	Id          uint64 `protobuf:"varint,8,opt,name=id,proto3" json:"id,omitempty"`
 }
@@ -931,7 +931,7 @@ func (x *Post) GetDescription() string {
 	return ""
 }
 
-func (x *Post) GetInterest() int32 {
+func (x *Post) GetInterest() int64 {
 	if x != nil {
 		return x.Interest
 	}
@@ -967,7 +967,7 @@ var file_crud_crud_post_proto_rawDesc = []byte{
 	0x12, 0x20, 0x0a, 0x0b, 0x64, 0x65, 0x73, 0x63, 0x72, 0x69, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x18,
 	0x05, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b, 0x64, 0x65, 0x73, 0x63, 0x72, 0x69, 0x70, 0x74, 0x69,
 	0x6f, 0x6e, 0x12, 0x1a, 0x0a, 0x08, 0x69, 0x6e, 0x74, 0x65, 0x72, 0x65, 0x73, 0x74, 0x18, 0x06,
-	0x20, 0x01, 0x28, 0x05, 0x52, 0x08, 0x69, 0x6e, 0x74, 0x65, 0x72, 0x65, 0x73, 0x74, 0x12, 0x18,
+	0x20, 0x01, 0x28, 0x03, 0x52, 0x08, 0x69, 0x6e, 0x74, 0x65, 0x72, 0x65, 0x73, 0x74, 0x12, 0x18,
 	0x0a, 0x07, 0x63, 0x72, 0x65, 0x61, 0x74, 0x6f, 0x72, 0x18, 0x07, 0x20, 0x01, 0x28, 0x09, 0x52,
 	0x07, 0x63, 0x72, 0x65, 0x61, 0x74, 0x6f, 0x72, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x08,
 	0x20, 0x01, 0x28, 0x04, 0x52, 0x02, 0x69, 0x64, 0x42, 0x7b, 0x0a, 0x0d, 0x63, 0x6f, 0x6d, 0x2e,

@@ -19,7 +19,11 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	Msg_UpdateParams_FullMethodName = "/crud.crud.Msg/UpdateParams"
+	Msg_UpdateParams_FullMethodName    = "/crud.crud.Msg/UpdateParams"
+	Msg_CreateEventPost_FullMethodName = "/crud.crud.Msg/CreateEventPost"
+	Msg_UpdateEventPost_FullMethodName = "/crud.crud.Msg/UpdateEventPost"
+	Msg_DeleteEventPost_FullMethodName = "/crud.crud.Msg/DeleteEventPost"
+	Msg_ExpressInterest_FullMethodName = "/crud.crud.Msg/ExpressInterest"
 )
 
 // MsgClient is the client API for Msg service.
@@ -29,6 +33,10 @@ type MsgClient interface {
 	// UpdateParams defines a (governance) operation for updating the module
 	// parameters. The authority defaults to the x/gov module account.
 	UpdateParams(ctx context.Context, in *MsgUpdateParams, opts ...grpc.CallOption) (*MsgUpdateParamsResponse, error)
+	CreateEventPost(ctx context.Context, in *MsgCreateEventPost, opts ...grpc.CallOption) (*MsgCreateEventPostResponse, error)
+	UpdateEventPost(ctx context.Context, in *MsgUpdateEventPost, opts ...grpc.CallOption) (*MsgUpdateEventPostResponse, error)
+	DeleteEventPost(ctx context.Context, in *MsgDeleteEventPost, opts ...grpc.CallOption) (*MsgDeleteEventPostResponse, error)
+	ExpressInterest(ctx context.Context, in *MsgExpressInterest, opts ...grpc.CallOption) (*MsgExpressInterestResponse, error)
 }
 
 type msgClient struct {
@@ -48,6 +56,42 @@ func (c *msgClient) UpdateParams(ctx context.Context, in *MsgUpdateParams, opts 
 	return out, nil
 }
 
+func (c *msgClient) CreateEventPost(ctx context.Context, in *MsgCreateEventPost, opts ...grpc.CallOption) (*MsgCreateEventPostResponse, error) {
+	out := new(MsgCreateEventPostResponse)
+	err := c.cc.Invoke(ctx, Msg_CreateEventPost_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *msgClient) UpdateEventPost(ctx context.Context, in *MsgUpdateEventPost, opts ...grpc.CallOption) (*MsgUpdateEventPostResponse, error) {
+	out := new(MsgUpdateEventPostResponse)
+	err := c.cc.Invoke(ctx, Msg_UpdateEventPost_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *msgClient) DeleteEventPost(ctx context.Context, in *MsgDeleteEventPost, opts ...grpc.CallOption) (*MsgDeleteEventPostResponse, error) {
+	out := new(MsgDeleteEventPostResponse)
+	err := c.cc.Invoke(ctx, Msg_DeleteEventPost_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *msgClient) ExpressInterest(ctx context.Context, in *MsgExpressInterest, opts ...grpc.CallOption) (*MsgExpressInterestResponse, error) {
+	out := new(MsgExpressInterestResponse)
+	err := c.cc.Invoke(ctx, Msg_ExpressInterest_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // MsgServer is the server API for Msg service.
 // All implementations must embed UnimplementedMsgServer
 // for forward compatibility
@@ -55,6 +99,10 @@ type MsgServer interface {
 	// UpdateParams defines a (governance) operation for updating the module
 	// parameters. The authority defaults to the x/gov module account.
 	UpdateParams(context.Context, *MsgUpdateParams) (*MsgUpdateParamsResponse, error)
+	CreateEventPost(context.Context, *MsgCreateEventPost) (*MsgCreateEventPostResponse, error)
+	UpdateEventPost(context.Context, *MsgUpdateEventPost) (*MsgUpdateEventPostResponse, error)
+	DeleteEventPost(context.Context, *MsgDeleteEventPost) (*MsgDeleteEventPostResponse, error)
+	ExpressInterest(context.Context, *MsgExpressInterest) (*MsgExpressInterestResponse, error)
 	mustEmbedUnimplementedMsgServer()
 }
 
@@ -64,6 +112,18 @@ type UnimplementedMsgServer struct {
 
 func (UnimplementedMsgServer) UpdateParams(context.Context, *MsgUpdateParams) (*MsgUpdateParamsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateParams not implemented")
+}
+func (UnimplementedMsgServer) CreateEventPost(context.Context, *MsgCreateEventPost) (*MsgCreateEventPostResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateEventPost not implemented")
+}
+func (UnimplementedMsgServer) UpdateEventPost(context.Context, *MsgUpdateEventPost) (*MsgUpdateEventPostResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateEventPost not implemented")
+}
+func (UnimplementedMsgServer) DeleteEventPost(context.Context, *MsgDeleteEventPost) (*MsgDeleteEventPostResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteEventPost not implemented")
+}
+func (UnimplementedMsgServer) ExpressInterest(context.Context, *MsgExpressInterest) (*MsgExpressInterestResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ExpressInterest not implemented")
 }
 func (UnimplementedMsgServer) mustEmbedUnimplementedMsgServer() {}
 
@@ -96,6 +156,78 @@ func _Msg_UpdateParams_Handler(srv interface{}, ctx context.Context, dec func(in
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Msg_CreateEventPost_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgCreateEventPost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MsgServer).CreateEventPost(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Msg_CreateEventPost_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MsgServer).CreateEventPost(ctx, req.(*MsgCreateEventPost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Msg_UpdateEventPost_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgUpdateEventPost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MsgServer).UpdateEventPost(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Msg_UpdateEventPost_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MsgServer).UpdateEventPost(ctx, req.(*MsgUpdateEventPost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Msg_DeleteEventPost_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgDeleteEventPost)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MsgServer).DeleteEventPost(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Msg_DeleteEventPost_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MsgServer).DeleteEventPost(ctx, req.(*MsgDeleteEventPost))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Msg_ExpressInterest_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgExpressInterest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MsgServer).ExpressInterest(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Msg_ExpressInterest_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MsgServer).ExpressInterest(ctx, req.(*MsgExpressInterest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Msg_ServiceDesc is the grpc.ServiceDesc for Msg service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -106,6 +238,22 @@ var Msg_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateParams",
 			Handler:    _Msg_UpdateParams_Handler,
+		},
+		{
+			MethodName: "CreateEventPost",
+			Handler:    _Msg_CreateEventPost_Handler,
+		},
+		{
+			MethodName: "UpdateEventPost",
+			Handler:    _Msg_UpdateEventPost_Handler,
+		},
+		{
+			MethodName: "DeleteEventPost",
+			Handler:    _Msg_DeleteEventPost_Handler,
+		},
+		{
+			MethodName: "ExpressInterest",
+			Handler:    _Msg_ExpressInterest_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

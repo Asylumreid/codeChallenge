@@ -1,4 +1,5 @@
 syntax = "proto3";
+
 package crud.crud;
 
 import "amino/amino.proto";
@@ -12,29 +13,77 @@ option go_package = "crud/x/crud/types";
 // Msg defines the Msg service.
 service Msg {
   option (cosmos.msg.v1.service) = true;
-
+  
   // UpdateParams defines a (governance) operation for updating the module
   // parameters. The authority defaults to the x/gov module account.
-  rpc UpdateParams(MsgUpdateParams) returns (MsgUpdateParamsResponse);
+  rpc UpdateParams    (MsgUpdateParams   ) returns (MsgUpdateParamsResponse   );
+  rpc CreateEventPost (MsgCreateEventPost) returns (MsgCreateEventPostResponse);
+  rpc UpdateEventPost (MsgUpdateEventPost) returns (MsgUpdateEventPostResponse);
+  rpc DeleteEventPost (MsgDeleteEventPost) returns (MsgDeleteEventPostResponse);
+  rpc ExpressInterest (MsgExpressInterest) returns (MsgExpressInterestResponse);
 }
-
 // MsgUpdateParams is the Msg/UpdateParams request type.
 message MsgUpdateParams {
-  option (cosmos.msg.v1.signer) = "authority";
-  option (amino.name) = "crud/x/crud/MsgUpdateParams";
-
+  option (cosmos.msg.v1.signer) =                   "authority";
+  option           (amino.name) = "crud/x/crud/MsgUpdateParams";
+  
   // authority is the address that controls the module (defaults to x/gov unless overwritten).
   string authority = 1 [(cosmos_proto.scalar) = "cosmos.AddressString"];
 
   // params defines the module parameters to update.
-  //
+  
   // NOTE: All parameters must be supplied.
-  Params params = 2 [
-    (gogoproto.nullable) = false,
-    (amino.dont_omitempty) = true
-  ];
+  Params params = 2 [(gogoproto.nullable) = false, (amino.dont_omitempty) = true];
 }
 
 // MsgUpdateParamsResponse defines the response structure for executing a
 // MsgUpdateParams message.
 message MsgUpdateParamsResponse {}
+
+message MsgCreateEventPost {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator     = 1;
+  string title       = 2;
+  string eventType   = 3;
+  string datetime    = 4;
+  string venue       = 5;
+  string description = 6;
+  string interest    = 7;
+}
+
+message MsgCreateEventPostResponse {
+  uint64 id = 1;
+}
+
+message MsgUpdateEventPost {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator     = 1;
+  string title       = 2;
+  string eventType   = 3;
+  string datetime    = 4;
+  string venue       = 5;
+  string description = 6;
+  string interest    = 7;
+  uint64 id          = 8;
+}
+
+message MsgUpdateEventPostResponse {}
+
+message MsgDeleteEventPost {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator = 1;
+  uint64 id      = 2;
+}
+
+message MsgDeleteEventPostResponse {}
+
+message MsgExpressInterest {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator = 1;
+  uint64 id      = 2;
+}
+
+message MsgExpressInterestResponse {
+  int64 newInterestCount = 1;
+}
+
