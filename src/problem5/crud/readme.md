@@ -1,51 +1,46 @@
-# crud
-**crud** is a blockchain built using Cosmos SDK and Tendermint and created with [Ignite CLI](https://ignite.com/cli).
+# Brief about my CRUD Chain
+Welcome to my CRUD Chain for Problem 5. I decided to create a use case on how this chain might be implemented in the real world. Thus creating a Events Platform inspired CRUD chain. This chain allows creators to create event posts. Those interested in those events can be able to express their interest and the chain will tally the total number of interests for each event. Let go into detail how this is done. 
 
-## Get started
-
-```
-ignite chain serve
-```
-
-`serve` command installs dependencies, builds, initializes, and starts your blockchain in development.
-
-### Configure
-
-Your blockchain in development can be configured with `config.yml`. To learn more, see the [Ignite CLI docs](https://docs.ignite.com).
-
-### Web Frontend
-
-Additionally, Ignite CLI offers both Vue and React options for frontend scaffolding:
-
-For a Vue frontend, use: `ignite scaffold vue`
-For a React frontend, use: `ignite scaffold react`
-These commands can be run within your scaffolded blockchain project. 
-
-
-For more information see the [monorepo for Ignite front-end development](https://github.com/ignite/web).
-
-## Release
-To release a new version of your blockchain, create and push a new tag with `v` prefix. A new draft release with the configured targets will be created.
+## Create
+Creating an event post by:
 
 ```
-git tag v0.1
-git push origin v0.1
+./crudd tx crud create-event-post '(title)' '(eventType)' '(dateTime)' '(venue)' '(description)' '(interestCount)' --from (User) --chain-id crud
 ```
 
-After a draft release is created, make your final changes from the release page and publish it.
-
-### Install
-To install the latest version of your blockchain node's binary, execute the following command on your machine:
+## Read
+### Specific Post:
 
 ```
-curl https://get.ignite.com/username/crud@latest! | sudo bash
+./crudd q crud show-post 0
 ```
-`username/crud` should match the `username` and `repo_name` of the Github repository to which the source code was pushed. Learn more about [the install process](https://github.com/allinbits/starport-installer).
 
-## Learn more
+### List of Posts:
 
-- [Ignite CLI](https://ignite.com/cli)
-- [Tutorials](https://docs.ignite.com/guide)
-- [Ignite CLI docs](https://docs.ignite.com)
-- [Cosmos SDK docs](https://docs.cosmos.network)
-- [Developer Chat](https://discord.gg/ignite)
+```
+./crudd q crud list-post
+```
+
+### Further Filtering of Post by eventType:
+
+```
+./crudd q crud list-post
+```
+
+## Update
+
+```
+./crudd tx crud create-update-post '(title)' '(eventType)' '(dateTime)' '(venue)' '(description)' '(interestCount)' (postId) --from (User) --chain-id crud
+```
+
+## Delete
+```
+./crudd tx crud delete-post (postId) --from (User) --chain-id crud 
+```
+
+## Additional Feature (Express Interest)
+Express interest to event post
+
+```
+./crudd tx crud express-interest 0 --from (User) --chain-id crud
+```
