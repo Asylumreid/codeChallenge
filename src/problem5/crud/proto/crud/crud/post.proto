@@ -1,0 +1,16 @@
+syntax = "proto3";
+package crud.crud;
+
+option go_package = "crud/x/crud/types";
+
+message Post {
+  
+  string title = 1; 
+  string eventType = 2; 
+  string datetime = 3; 
+  string venue = 4; 
+  string description = 5; 
+  int32 interest = 6; 
+  string creator = 7; 
+  uint64 id = 8; 
+}
