@@ -1,4 +1,4 @@
-#Implementing Consensus Breaking
+# Implementing Consensus Breaking
 
 My approach to this is by trying to hard fork my chain by modifying some versions of my App.go files which would allow one chain to run the old version of the consensus protocol and state while the other chain runs the new version, incompatible with the previous one. With this theory, I tried to modify the version however, was not able to get a clear consensus-breaking introduction into my chain. Would still need more time in research to be able to fully understand the tender mint consensus to implement another method to introduce this change.
 
